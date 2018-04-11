@@ -43,7 +43,7 @@ within that template.
 
 from django import template
 from django.template import loader
-from django.db import models
+from django.apps import apps
 from django.core.cache import cache
 
 from flatblocks import settings
@@ -54,7 +54,7 @@ import logging
 register = template.Library()
 logger = logging.getLogger(__name__)
 
-FlatBlock = models.get_model('flatblocks', 'flatblock')
+FlatBlock = apps.get_model('flatblocks', 'flatblock')
 
 
 class BasicFlatBlockWrapper(object):
