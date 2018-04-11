@@ -1,37 +1,27 @@
-# encoding: utf-8
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
-class Migration(SchemaMigration):
-
-    def forwards(self, orm):
-        
-        # Adding model 'FlatBlock'
-        db.create_table('flatblocks_flatblock', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('slug', self.gf('django.db.models.fields.CharField')(unique=True, max_length=255)),
-            ('header', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('content', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-        ))
-        db.send_create_signal('flatblocks', ['FlatBlock'])
+from django.db import migrations, models
 
 
-    def backwards(self, orm):
-        
-        # Deleting model 'FlatBlock'
-        db.delete_table('flatblocks_flatblock')
+class Migration(migrations.Migration):
 
+    dependencies = [
+    ]
 
-    models = {
-        'flatblocks.flatblock': {
-            'Meta': {'object_name': 'FlatBlock'},
-            'content': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'header': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'slug': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '255'})
-        }
-    }
-
-    complete_apps = ['flatblocks']
+    operations = [
+        migrations.CreateModel(
+            name='FlatBlock',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('slug', models.CharField(help_text='A unique name used for reference in the templates', unique=True, max_length=255, verbose_name='Slug')),
+                ('header', models.CharField(help_text='An optional header for this content', max_length=255, verbose_name='Header', blank=True)),
+                ('content', models.TextField(verbose_name='Content', blank=True)),
+            ],
+            options={
+                'verbose_name': 'Flat block',
+                'verbose_name_plural': 'Flat blocks',
+            },
+            bases=(models.Model,),
+        ),
+    ]
